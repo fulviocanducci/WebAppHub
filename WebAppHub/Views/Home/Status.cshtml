@@ -1,0 +1,27 @@
+﻿@{ ViewData["Title"] = "Status"; }
+<h1>Status</h1>
+<div>
+  <h3>Quantidade de registros de Todos: <span id="statusTodos">Carregando ...</span></h3>
+</div>
+
+@section Scripts {
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  
+  <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+  <script>
+    $(document).ready(function () {
+      connection = new signalR.HubConnectionBuilder()
+        .withUrl("/todohub")
+        .configureLogging(signalR.LogLevel.Information)
+        .withAutomaticReconnect()
+        .build();
+      connection.start()
+        .then(function () {
+          connection.on('GetClientCount', function (count) {
+            document.getElementById("statusTodos").innerHTML = count;
+          });
+          connection.invoke("GetServerCount");
+        }); 
+    })
+  </script>
+}
+
