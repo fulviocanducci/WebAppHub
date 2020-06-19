@@ -7,5 +7,6 @@ namespace WebAppHub.Models
         public DbContextTodo(DbContextOptions options)
             : base(options) { }
         public DbSet<Todo> Todo { get; set; }
+        public DbSet<UserConnected> UserConnected { get; set; }
     }
 }

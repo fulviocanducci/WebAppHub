@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAppHub.Models;
 
 namespace WebAppHub.Migrations
 {
     [DbContext(typeof(DbContextTodo))]
-    partial class DbContextTodoModelSnapshot : ModelSnapshot
+    [Migration("20200619212507_UserConnectedMigration")]
+    partial class UserConnectedMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -27,6 +27,7 @@ namespace WebAppHub
             services.AddDbContext<DbContextTodo>(
                 options => options.UseSqlite("Data Source = ./base.db")
             );
+            services.AddCors();
             services.AddSignalR();
             services.AddControllersWithViews();
         }
@@ -42,9 +43,17 @@ namespace WebAppHub
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-
-            app.UseRouting();
-
+            app.UseCors(options => {
+                options.AllowAnyOrigin();
+                options.AllowAnyMethod();
+                options.AllowAnyHeader();
+                options.AllowAnyMethod();
+                options.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .WithMethods("GET", "POST")
+                .AllowCredentials();
+            });
+            app.UseRouting();            
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
